@@ -1,0 +1,36 @@
+<template>
+    <view class="btn">
+        <view class="addCart">添加购物车</view>
+        <view class="buy">立即购买</view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class Btn extends wepy.component {
+
+    }
+</script>
+<style lang="scss" scoped>
+.btn{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:750rpx;
+    font-size:30rpx;
+    line-height:80rpx;
+    height:80rpx;
+    text-align:center;
+    .addCart{
+        display:inline-block;
+        color:#000;
+        width:375rpx;
+        background-color:#fff;
+    }
+    .buy{
+        display:inline-block;        
+        color:#fff;
+        width:375rpx;        
+        background-color:#71B641;
+    }
+}
+</style>

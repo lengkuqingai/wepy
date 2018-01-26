@@ -1,0 +1,159 @@
+<template>
+        <!--预加载，为了提前获取图片高度  -->
+    <view style="display:none">
+        <image wx:for="{{productList}}" wx:key="item" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
+    </view>
+    <view class="productList">
+        <!--瀑布流第一列  -->
+        <view >
+            <block wx:for="{{col1}}" wx:key="item">
+                <view class='item' @tap="GoToDetail({{item.id}})">
+                    <view class='item_content'>
+                        <view>
+                            <image mode="widthFix" src="{{item.pic}}"></image>
+                        </view>
+                        <view class='priceName'>{{item.name}}</view>
+                        <view>
+                            <text>价格:</text>
+                            <text class='priceOrigin' wx:if="{{item.originalPrice!=0}}">{{item.originalPrice}}</text>
+                            <text class='priceSale'>{{item.minPrice}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <!--瀑布流第二列  -->
+        <view >
+            <block wx:for="{{col2}}" wx:key="item">
+                <view class='item' @tap="GoToDetail({{item.id}})">
+                    <view class='item_content'>
+                        <view>
+                            <image mode="widthFix" src="{{item.pic}}"></image>
+                        </view>
+                    <view class='priceName'>{{item.name}}</view>
+                        <view>
+                            <text>价格:</text>
+                            <text class='priceOrigin' wx:if="{{item.originalPrice!=0}}">{{item.originalPrice}}</text>
+                            <text class='priceSale'>{{item.minPrice}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class List extends wepy.component {
+        props = {
+            productList:{
+                type:Object,
+                default:[]
+            },
+            imgWidth:{
+                type:String,
+                default:''
+            }
+        }
+        data = {
+            col1: [],
+            col2: [],
+            col1H: 0,
+            col2H: 0,
+        }
+        
+        events = {
+            'clean':()=>{
+                console.log('清除啦')
+                this.col1=[];
+                this.col2=[];
+                this.col1H=0;
+                this.col2H=0;
+            }
+        }
+        methods = {
+            onImageLoad(e){
+                let col1H = this.col1H;
+                let col2H = this.col2H;
+                let imageId=e.currentTarget.id;
+                let oImgW=e.detail.width;
+                let oImgH=e.detail.height; 
+                let imgWidth=this.imgWidth;
+                let scale=imgWidth/oImgW;
+                let imgHeight=oImgH*scale;
+                let images=this.productList;
+                let imageObj={};
+                images.forEach(v=>{
+                    if(v.id==imageId){
+                        imageObj=v;
+                    }
+                })
+                imageObj.height = imgHeight;
+                let loadingCount =this.loadingCount-1;
+                let col1 = this.col1;
+                let col2 = this.col2;
+                if(col1H<=col2H){
+                    col1H+=imgHeight;
+                    col1.push(imageObj);
+                }else{
+                    col2H+=imgHeight;
+                    col2.push(imageObj);
+                }
+                this.col1=col1,
+                this.col2=col2,
+                this.col1H=col1H,
+                this.col2H=col2H,
+                this.$apply();
+            },
+            GoToDetail(id){
+              console.log("id",id);
+              wx.navigateTo({
+                url:`../../GoodsDetail?id=${id}`,
+              })
+            }
+        }
+    }
+</script>
+<style lang="scss">
+.productList{
+  padding-top:100rpx;
+  overflow: hidden;
+  background: #fff;
+}
+.productList>view{
+  float: left;
+  width:375rpx;
+  overflow: hidden;
+}
+.item{
+  width:100%;
+  margin-bottom:20rpx;
+}
+.item_content{
+  width:90%;
+  margin: 0 auto;
+  border:1rpx solid #f6f7f8;
+  text-align: center;
+  padding-bottom:30rpx;
+}
+.item .priceName{
+  text-align: center;
+  font-size: 34rpx;
+}
+.item_content view:first-child image{
+  width:100%;
+}
+.item_content view:last-child text{
+  color:#6f6f6f;
+  font-size:34rpx;
+  margin-right:10rpx;
+}
+.item_content view:last-child .priceOrigin{
+  text-decoration:line-through;
+}
+.item_content view:last-child .priceSale{
+  color:#ed1991;
+  font-size: 40rpx;
+}
+</style>

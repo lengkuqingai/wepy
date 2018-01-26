@@ -1,0 +1,59 @@
+<style lang="scss">
+  page{background-color: #f6f7f8;}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/Home',
+      'pages/GoodsDetail',
+      'pages/My',
+      'pages/ProductList',
+      'pages/Reputation'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black'
+    },
+    "tabBar": {
+      "list": [{
+        "pagePath": "pages/Home",
+        "text": "首  页",
+        "iconPath":"./static/img/index-n.png",
+        "selectedIconPath": "static/img/index-y.png"
+      }, {
+        "pagePath": "pages/ProductList",
+        "text": "欢  乐 购",
+        "iconPath":"./static/img/class-n.png",
+        "selectedIconPath": "static/img/class-y.png"
+      },{
+        "pagePath": "pages/My",
+        "text": "我  的",
+        "iconPath":"./static/img/my-n.png",
+        "selectedIconPath": "static/img/my-y.png"
+      }]
+    },
+
+  }
+
+  globalData = {
+    
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+  }
+
+  onLaunch() {
+    
+  }
+
+ 
+}
+</script>

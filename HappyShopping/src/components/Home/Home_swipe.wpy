@@ -1,0 +1,50 @@
+<template>
+  <swiper style="height:{{swipe_height+'px'}}" indicator-dots="{{config.indicatorDots}}"  autoplay="{{config.autoplay}}" circular="{{config.circular}}">
+    <block wx:for="{{banner}}" wx:key="item">
+      <swiper-item>
+        <image bindload="Imgload" class="img" mode='widthFix' style='width:100%' src="{{item.picUrl || item.pic}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+</template>
+<script>
+    import wepy from 'wepy'
+    import _Until from '../../utils/until.js'
+    export default class Swipe extends wepy.component {
+        props = {
+            banner:{
+                type:Object,
+                default:[]
+            },
+            swipe_height:{
+                type:String,
+                default:""
+            }
+        }
+        data = {
+            config:{
+                indicatorDots:true,
+                circular:true,
+                autoplay:true
+            }
+        }
+        methods = {
+            Imgload(e){
+                let _this = this;
+                let scale = e.detail.width/e.detail.height;
+                wx.getSystemInfo({
+                    success(res){
+                        _this.swipe_height=res.windowWidth/scale;
+                    }
+                })
+            }
+        }
+        computed = {
+            
+        }
+        
+    }
+</script>
+<style lang="scss" scoped>
+
+</style>

@@ -1,0 +1,5 @@
+@import "./../components/GoodsDetail/GoodDetail_evaluate.wxss";
+@import "./../components/GoodsDetail/GoodDetail_list.wxss";
+@import "./../components/GoodsDetail/GoodDetail_basicInfo.wxss";
+@import "./../components/GoodsDetail/GoodDetail_btn.wxss";
+@import "./../components/GoodsDetail/GoodDetail_Img.wxss";

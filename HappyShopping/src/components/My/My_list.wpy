@@ -1,0 +1,55 @@
+<template>
+<view class="list">
+    <view class="item" wx:for="{{list}}" wx:key="item">
+        <image src="{{item.iconPath}}" class="icon"></image>
+        <text>{{item.title}}</text>
+        <image src="../../static/img/more.png" class="more" ></image>
+        <text class="money" >{{item.money}}</text>
+        <text class="icon-electronics"></text>
+    </view>
+</view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class List extends wepy.component {
+        props = {
+            list:{
+                type:Object,
+                default:[]
+            }
+        }
+    }
+</script>
+<style lang="scss" scoped>
+.list{
+    margin:30rpx 0;
+}
+    .item{
+        border-bottom:1px solid #F6F3F6;
+        padding:30rpx 20rpx;
+        background:#fff;
+        image{
+            width:50rpx;
+            height:50rpx;
+            vertical-align:middle;
+        }
+        text{
+            font-size:30rpx;
+            color:#3c3c3c;
+        }
+        .icon{
+            margin-right:30rpx;
+        }
+        .more{
+            float:right;
+        }
+        .money{
+            float:right;    
+            color:red;
+            line-height:50rpx;        
+        }
+    }
+    .item:last-child{
+        border-bottom:0;
+    }
+</style>

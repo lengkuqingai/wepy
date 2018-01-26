@@ -1,0 +1,107 @@
+<style lang="scss" scoped>
+    .header{
+        image{
+            width:100%;
+        }
+    }
+    .Down{
+
+    }
+</style>
+
+<template>
+    <view>
+        <view class="header">
+            <image src='http://pic.suiyiyun.cn/597286/background.png' mode="widthFix"></image>
+        </view>
+        <view class="Down" @touchmove="move" @touchstart="start" @touchend="end" style="margin-top:{{Top}}rpx;transition:{{transitionTime}}s" >
+            <Personal :userInfo.sync="userInfo"></Personal>
+            <List1 :list.sync="listOne"></List1>
+            <List2 :list.sync="listTwo"></List2>
+        </view>
+    </view>
+</template>
+<script>
+    import Redux from '../utils/redux.js'
+    import wepy from 'wepy'
+    import Personal from '../components/My/My_personal'
+    import List from '../components/My/My_list'    
+    import _API from '../http/api.js'
+    import _Until from '../utils/until.js'
+    export default class My extends wepy.page {
+        data = {
+            infos:'',
+            userInfo:{},
+            Top:"-210",
+            transitionTime:'0',
+            listOne:[
+                {
+                    title:"全部订单",
+                    iconPath:"http://pic.suiyiyun.cn/597286/order.png",
+                    money:"0.00"
+                },
+                {
+                    title:"账户余额",
+                    iconPath:"http://pic.suiyiyun.cn/597286/balance.png",
+                    money:"0.00"
+                },
+                {
+                    title:"收获地址",
+                    iconPath:"http://pic.suiyiyun.cn/597286/address.png"
+                },
+                {
+                    title:"我的积分",
+                    iconPath:"http://pic.suiyiyun.cn/597286/integral.png",
+                    money:"0.00"
+                },
+            ],
+            listTwo:[
+                {
+                    title:"个人资料",
+                    iconPath:"http://pic.suiyiyun.cn/597286/data.png"
+                },
+                {
+                    title:"设置",
+                    iconPath:"http://pic.suiyiyun.cn/597286/setUp.png"
+                }
+            ]
+        }
+        methods = {
+            start(e){
+                console.log("手指开始出发");
+                this.transitionTime="0";
+                this.start = e.changedTouches[0].clientY;
+            },
+            move(e){
+                console.log("手指正在移动！")
+                this.Top = e.changedTouches[0].clientY - this.start;
+            },
+            end(e){
+                console.log("手指离开了");
+                this.transitionTime="1";
+                this.Top = "-210";
+            }
+        }
+        components = {
+            Personal:Personal,
+            List1:List,
+            List2:List
+        }
+        onLoad(){
+            let _this = this;
+            wx.login({
+                success(){
+                    console.log("登录成功！");
+                    wx.getUserInfo({
+                        success(res){
+                            _this.userInfo = JSON.parse(res.rawData);
+                            _this.$apply();
+                            console.log("获取用户信息成功！",_this.userInfo);
+                        }
+                    })
+                }
+            })
+
+        }
+    }
+</script>

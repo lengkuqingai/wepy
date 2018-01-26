@@ -1,0 +1,49 @@
+
+    <view class="_c4b0505">
+        <view class="header _c4b0505">
+            <image src="http://pic.suiyiyun.cn/597286/background.png" mode="widthFix" class="_c4b0505"/>
+        </view>
+        <view class="Down _c4b0505" bindtouchmove="move" bindtouchstart="start" bindtouchend="end" style="margin-top:{{Top}}rpx;transition:{{transitionTime}}s">
+            
+    <view class="content _bcd53ac _c4b0505">
+        <view class="portrait _bcd53ac">
+            <image src="{{$Personal$userInfo.avatarUrl}}" class="_bcd53ac"/>
+            <text class="_bcd53ac">{{$Personal$userInfo.nickName}}</text>
+        </view>
+        <view class="status _bcd53ac">
+            <view class="item _bcd53ac">
+                <view class="num _bcd53ac">0</view>
+                <view class="_bcd53ac">待付款</view>
+            </view>
+            <view class="item _bcd53ac">
+                <view class="num _bcd53ac">0</view>
+                <view class="_bcd53ac">待收货</view>
+            </view>
+            <view class="item _bcd53ac">
+                <view class="num _bcd53ac">0</view>
+                <view class="_bcd53ac">待评价</view>
+            </view>
+        </view>
+    </view>
+            
+<view class="list _ccd5c0a _c4b0505">
+    <view class="item _ccd5c0a"  wx:for="{{$List1$list}}" wx:key="item">
+        <image src="{{item.iconPath}}" class="icon _ccd5c0a"/>
+        <text class="_ccd5c0a">{{item.title}}</text>
+        <image src="../static/img/more.png" class="more _ccd5c0a"/>
+        <text class="money _ccd5c0a">{{item.money}}</text>
+        <text class="icon-electronics _ccd5c0a"/>
+    </view>
+</view>
+            
+<view class="list _ccd5c0a _c4b0505">
+    <view class="item _ccd5c0a"  wx:for="{{$List2$list}}" wx:key="item">
+        <image src="{{item.iconPath}}" class="icon _ccd5c0a"/>
+        <text class="_ccd5c0a">{{item.title}}</text>
+        <image src="../static/img/more.png" class="more _ccd5c0a"/>
+        <text class="money _ccd5c0a">{{item.money}}</text>
+        <text class="icon-electronics _ccd5c0a"/>
+    </view>
+</view>
+        </view>
+    </view>

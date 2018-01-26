@@ -1,0 +1,157 @@
+<template>
+    <view class="wrap">
+        <view class="head">
+            <view class="line">
+            ------------------------------------------------------------------------
+                <view class="center">
+                    <view class="evaluate">
+                        <image mode="widthFix" src="../../static/img/evaluate.png"></image>
+                        <text>评价</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="content">
+            <view class="title">
+                <text>宝贝评价</view>
+            </view>
+            <view class="list">
+                <view class="head">
+                    <image src="../../static/img/head.png"></image>
+                </view>
+                <view class="name">
+                    {{reputation[0].user.nick}}
+                </view>
+                <view class="reputation" wx:if="{{reputation[0].goods.goodReputation==0}}">
+                    差评              
+                </view>
+                <view class="reputation" wx:if="{{reputation[0].goods.goodReputation==1}}">
+                    中评              
+                </view>
+                <view class="reputation" wx:if="{{reputation[0].goods.goodReputation==2}}">
+                    好评              
+                </view>
+                <view class="remark">
+                    {{reputation[0].goods.goodReputationRemark}}
+                </view>
+                <view class="date">
+                   <view>{{reputation[0].goods.dateReputation}}</view>
+                   <view class="property">{{reputation[0].goods.property}}</view>
+                </view>
+                <view class="btn" @tap="GoToAll">
+                    查看全部评价
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class Evaluate extends wepy.component {
+        props = {
+            reputation:{
+                type:Object,
+                default:[]
+            }
+        }
+        methods = {
+            GoToAll(){
+                // wx.navigateTo({url:'../../Reputation'})
+            }
+        }
+    }
+</script>
+<style lang="scss" scoped>
+    .head{
+        padding:20rpx 0;
+        font-size:26rpx;
+        color:#999;
+        image{
+            width:40rpx;
+            vertical-align:middle;
+        }
+    }
+    .line{
+        width:400rpx;
+        height:40rpx;
+        overflow:hidden;
+        margin:0 auto;
+        position:relative;
+        letter-spacing:-4rpx;
+    }
+    .center{
+        position:absolute;
+        width:100%;
+        top:0;
+        left:0;
+        z-index:10;
+        text-align:center;
+    }
+    .evaluate{
+        display:inline-block;
+        padding:0 20rpx;
+        background-color:#F6F7F8;
+        letter-spacing:1rpx;
+        text{
+            padding-left:5rpx;
+        }
+    }
+    .content{
+        background:#fff;
+        .title{
+            padding:20rpx 20rpx;
+            font-size:30rpx;
+            color:#666;
+        }
+        
+    }
+    .list{
+        padding:0 20rpx 100rpx;
+        background:#fff;
+        font-size:30rpx;
+        color:#666;
+        .head{
+            display:inline-block;
+            margin-right:20rpx;
+            image{
+                width:50rpx;
+                height:50rpx;
+            }
+        }
+        .name{
+            display:inline-block;
+            margin-right:20rpx;            
+        }
+        .reputation{
+            display:inline-block;
+        }
+        .remark{
+            text-indent:2em;
+            font-size:30rpx;
+            color:#222;
+            background-color:#fff;
+            padding-bottom:10rpx;
+        }
+        .date{
+            font-size:24rpx;
+            margin-top:30rpx;
+            color:#666;
+            display:flex;
+            .property{
+                margin-left:100rpx;
+            }
+        }
+        .btn{
+            width:250rpx;
+            height:50rpx;
+            line-height:50rpx;
+            font-size:30rpx;
+            color:red;
+            text-align:center;
+            border-radius:25rpx;
+            margin:40rpx auto 0;
+            border:1rpx solid red;
+        }
+    }
+    
+</style>

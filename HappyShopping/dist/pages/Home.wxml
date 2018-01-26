@@ -1,0 +1,99 @@
+
+  <view class="_0c15610">
+    
+  <swiper style="height:{{$Swipe$swipe_height+'px'}}" indicator-dots="{{$Swipe$config.indicatorDots}}" autoplay="{{$Swipe$config.autoplay}}" circular="{{$Swipe$config.circular}}" class="_69a8612 _0c15610" wx:if="{{banner&&banner.length>1}}">
+    <block  wx:for="{{$Swipe$banner}}" wx:key="item" class="_69a8612">
+      <swiper-item class="_69a8612">
+        <image bindload="$Swipe$Imgload" class="img _69a8612" mode="widthFix" style="width:100%" src="{{item.picUrl || item.pic}}"/>
+      </swiper-item>
+    </block>
+  </swiper>
+    
+<view class="product _4fa74e0 _0c15610">
+  <view class="product_head _4fa74e0">
+    <view class="_4fa74e0">
+      <image src="{{$Products1$product.icon}}" class="_4fa74e0"/>
+      <text class="_4fa74e0">{{$Products1$product.title}}</text>
+    </view>
+    <view class="more _4fa74e0" bindtap="$Products1$GoToProductList">
+      <text class="_4fa74e0">{{$Products1$product.more}}</text>
+      <image src="{{$Products1$product.moreIcon}}" class="_4fa74e0"/>
+    </view>
+  </view>
+  <view class="product_content _4fa74e0" style="{{$Products1$product.title!=='新手专享'?'background-color:#fff':''}}">
+    <view class="_4fa74e0">
+      <view class="characteristic _4fa74e0">
+        <text class="_4fa74e0">{{$Products1$product.characteristic}}</text>
+      </view>
+      <view class="disPrice _4fa74e0">
+        <text class="_4fa74e0">￥{{$Products1$product.minPrice}}</text>
+      </view>
+       <view class="name _4fa74e0">
+        <text class="_4fa74e0">{{$Products1$product.name}}</text>
+      </view>
+      <view class="addCart _4fa74e0">
+        <button bindtap="$Products1$GoToDetail" class="_4fa74e0" data-wpygotodetail-a="{{$Products1$product.id}}">{{$Products1$product.btnText}}</button>
+      </view>
+    </view>
+  </view>
+  <view class="product_contents _4fa74e0">
+    <block class="_4fa74e0" wx:for="{{$Products1$products}}" wx:for-index="$Products1$index" wx:for-item="$Products1$item" wx:key="$Products1$key">
+        <view bindtap="$Products1$GoToDetail" class="_4fa74e0" data-wpygotodetail-a="{{$Products1$product.id}}">
+            <view style="background-image:url({{$Products1$product.top}})" class="_4fa74e0">{{$Products1$item.name}}</view>
+            <view style="background-image:url({{$Products1$product.bottom}})" class="product_contents_bottom _4fa74e0">
+                <view class="disPrices _4fa74e0">
+                    <text class="_4fa74e0">￥{{$Products1$item.minPrice}}</text>
+                </view>
+                <view class="names _4fa74e0">
+                    <text class="_4fa74e0">限时抢购</text>
+                </view>
+            </view>
+        </view>
+    </block>
+  </view>
+</view>
+    
+<view class="product _4fa74e0 _0c15610">
+  <view class="product_head _4fa74e0">
+    <view class="_4fa74e0">
+      <image src="{{$Products2$product.icon}}" class="_4fa74e0"/>
+      <text class="_4fa74e0">{{$Products2$product.title}}</text>
+    </view>
+    <view class="more _4fa74e0" bindtap="$Products2$GoToProductList">
+      <text class="_4fa74e0">{{$Products2$product.more}}</text>
+      <image src="{{$Products2$product.moreIcon}}" class="_4fa74e0"/>
+    </view>
+  </view>
+  <view class="product_content _4fa74e0" style="{{$Products2$product.title!=='新手专享'?'background-color:#fff':''}}">
+    <view class="_4fa74e0">
+      <view class="characteristic _4fa74e0">
+        <text class="_4fa74e0">{{$Products2$product.characteristic}}</text>
+      </view>
+      <view class="disPrice _4fa74e0">
+        <text class="_4fa74e0">￥{{$Products2$product.minPrice}}</text>
+      </view>
+       <view class="name _4fa74e0">
+        <text class="_4fa74e0">{{$Products2$product.name}}</text>
+      </view>
+      <view class="addCart _4fa74e0">
+        <button bindtap="$Products2$GoToDetail" class="_4fa74e0" data-wpygotodetail-a="{{$Products2$product.id}}">{{$Products2$product.btnText}}</button>
+      </view>
+    </view>
+  </view>
+  <view class="product_contents _4fa74e0">
+    <block class="_4fa74e0" wx:for="{{$Products2$products}}" wx:for-index="$Products2$index" wx:for-item="$Products2$item" wx:key="$Products2$key">
+        <view bindtap="$Products2$GoToDetail" class="_4fa74e0" data-wpygotodetail-a="{{$Products2$product.id}}">
+            <view style="background-image:url({{$Products2$product.top}})" class="_4fa74e0">{{$Products2$item.name}}</view>
+            <view style="background-image:url({{$Products2$product.bottom}})" class="product_contents_bottom _4fa74e0">
+                <view class="disPrices _4fa74e0">
+                    <text class="_4fa74e0">￥{{$Products2$item.minPrice}}</text>
+                </view>
+                <view class="names _4fa74e0">
+                    <text class="_4fa74e0">限时抢购</text>
+                </view>
+            </view>
+        </view>
+    </block>
+  </view>
+</view>
+  </view>

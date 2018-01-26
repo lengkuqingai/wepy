@@ -1,0 +1,87 @@
+<template>
+    <view class="basicInfo">
+        <view class="characteristic"><text>{{basic.characteristic}}</text></view>
+        <view class="priceShare">
+            <view>
+                <text>原价:<text class="price" style="text-decoration:line-through ">￥{{basic.originalPrice}}元</text></text>
+                <text>优惠价:<text class="price" style="font-size:40rpx">￥{{basic.minPrice}}元</text></text>
+            </view>
+            <view>
+                <view @tap="share">
+                    <button open-type="share" style="background-image:url('../../static/img/share.png');"></button>
+                    <text>分享</text>
+                </view>
+                <view>
+                    <button style="background-image:url('../../static/img/view.png');"></button>
+                    <text>{{basic.views}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="express" wx:if="{{basic.isFree==true}}">
+            快递:0.00元
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class Basic extends wepy.component {
+        props = {
+            basic:{
+                type:Object,
+                default:{}
+            }
+        }
+        methods = {
+            share(){
+
+            }
+        }
+    }
+</script>
+<style lang="scss" scoped>
+    .basicInfo{
+        background-color:#fff;
+        font-size:24rpx;
+        color:#3c3c3c;
+        .characteristic{
+            color:#000;
+            font-size:32rpx;
+        }
+        .price{
+            color:#71B641;
+            font-size:30rpx;
+            margin:0 15rpx;           
+        }
+    }
+    .basicInfo>view{
+        padding:0 15rpx;
+        line-height:50rpx;
+        height:50rpx;
+    }
+    .priceShare{
+        padding-bottom:20rpx !important;
+        &>view:first-child{
+            float:left;
+        }
+        &>view:last-child{
+            float:right;
+            view{
+                display:inline-block;
+            }
+            button{
+                width:30rpx;
+                height:30rpx;
+                padding:0;
+                display:inline-block;
+                background-size:100% 100%;
+                border:none;
+                margin:10rpx;
+                vertical-align:middle;
+            }
+            button::after {
+                border:none;
+            }
+        }
+    }
+   
+</style>

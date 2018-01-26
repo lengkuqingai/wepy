@@ -1,0 +1,91 @@
+<template>
+<view class="product">
+  <view class='price' @tap="setSort(0)">
+    <view>
+      <text>产品价格</text>
+      <image wx:if="{{sortBy[0]==0}}" src="../../static/img/sort.png"></image>
+      <image wx:if="{{sortBy[0]==1}}" src="../../static/img/sort_top.png"></image>
+      <image wx:if="{{sortBy[0]==2}}"src="../../static/img/sort_bottom.png"></image>
+    </view>
+  </view>
+  <view class='sales' @tap="setSort(1)">
+    <view>
+      <text>产品销量</text>
+      <image wx:if="{{sortBy[1]==0}}" src="../../static/img/sort.png"></image>
+      <image wx:if="{{sortBy[1]==1}}" src="../../static/img/sort_top.png"></image>
+      <image wx:if="{{sortBy[1]==2}}" src="../../static/img/sort_bottom.png"></image>
+    </view>
+  </view>
+</view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class Sort extends wepy.component {
+        props = {
+            sortClass:{
+                type:String,
+                default:"priceUp",
+                twoWay:true
+            }
+        }
+        data = {
+            sortBy:[1,0]
+        }
+        methods = {
+            setSort(num){
+                if(num==0){
+                    if(this.sortBy[0]!=1){
+                        this.sortBy=[1,0];
+                        this.sortClass="priceUp"
+                    }else{
+                        this.sortBy=[2,0];
+                        this.sortClass="priceDown"
+                    }
+                }else if(num==1){
+                    if(this.sortBy[1]!=1){
+                        this.sortBy=[0,1];
+                        this.sortClass="ordersUp"
+                    }else{
+                        this.sortBy=[0,2];
+                        this.sortClass="ordersDown"
+                    }
+                }
+            }
+        }
+        events = {
+            
+        }
+    }
+</script>
+<style lang="scss">
+ /*头部分类  */
+.product{
+  display: flex;
+  position: fixed;
+  width:100%;
+}
+.product>view {
+  text-align: center;
+  font-size:32rpx;
+  padding:20rpx 0;
+  flex:1;
+  background-color:#fff;
+  border-bottom:4rpx solid #fff;
+  color: #6f6f6f;
+}
+.product>.active{
+  border-bottom:4rpx solid #ed1991;
+  color: #ed1991;
+}
+.product>view>view:first-child{
+  border-right:1px solid #f2f2f2;
+}
+.product view image{
+  width:30rpx;
+  height:30rpx;
+  vertical-align: middle;
+}
+.product view text{
+  margin-right:22rpx;
+}   
+</style>

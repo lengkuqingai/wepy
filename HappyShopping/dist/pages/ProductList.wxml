@@ -1,0 +1,68 @@
+
+    <view class="_77949d8">
+        
+<view class="product _77949d8">
+  <view class="price" bindtap="$Sort$setSort" data-wpysetsort-a="0">
+    <view>
+      <text>产品价格</text>
+      <image  wx:if="{{$Sort$sortBy[0]==0}}" src="../static/img/sort.png"/>
+      <image  wx:if="{{$Sort$sortBy[0]==1}}" src="../static/img/sort_top.png"/>
+      <image wx:if="{{$Sort$sortBy[0]==2}}" src="../static/img/sort_bottom.png"/>
+    </view>
+  </view>
+  <view class="sales" bindtap="$Sort$setSort" data-wpysetsort-a="1">
+    <view>
+      <text>产品销量</text>
+      <image wx:if="{{$Sort$sortBy[1]==0}}" src="../static/img/sort.png"/>
+      <image wx:if="{{$Sort$sortBy[1]==1}}" src="../static/img/sort_top.png"/>
+      <image wx:if="{{$Sort$sortBy[1]==2}}" src="../static/img/sort_bottom.png"/>
+    </view>
+  </view>
+</view>
+
+        
+        <!--预加载，为了提前获取图片高度  -->
+    <view style="display:none" class=" _77949d8">
+        <image  wx:for="{{$List$productList}}" wx:key="item" id="{{item.id}}" src="{{item.pic}}" bindload="$List$onImageLoad"/>
+    </view>
+    <view class="productList">
+        <!--瀑布流第一列  -->
+        <view>
+            <block  wx:for="{{$List$col1}}" wx:key="item">
+                <view class="item" bindtap="$List$GoToDetail" data-wpygotodetail-a="{{item.id}}">
+                    <view class="item_content">
+                        <view>
+                            <image mode="widthFix" src="{{item.pic}}"/>
+                        </view>
+                        <view class="priceName">{{item.name}}</view>
+                        <view>
+                            <text>价格:</text>
+                            <text class="priceOrigin" wx:if="{{item.originalPrice!=0}}">{{item.originalPrice}}</text>
+                            <text class="priceSale">{{item.minPrice}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <!--瀑布流第二列  -->
+        <view>
+            <block  wx:for="{{$List$col2}}" wx:key="item">
+                <view class="item" bindtap="$List$GoToDetail" data-wpygotodetail-a="{{item.id}}">
+                    <view class="item_content">
+                        <view>
+                            <image mode="widthFix" src="{{item.pic}}"/>
+                        </view>
+                    <view class="priceName">{{item.name}}</view>
+                        <view>
+                            <text>价格:</text>
+                            <text class="priceOrigin" wx:if="{{item.originalPrice!=0}}">{{item.originalPrice}}</text>
+                            <text class="priceSale">{{item.minPrice}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        </view>
+    
+
+    </view>

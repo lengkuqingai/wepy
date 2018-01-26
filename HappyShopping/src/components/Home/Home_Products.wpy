@@ -1,0 +1,173 @@
+<template>
+<view class='product'>
+  <view class='product_head'>
+    <view>
+      <image src="{{product.icon}}"></image>
+      <text>{{product.title}}</text>
+    </view>
+    <view class='more' bindtap='GoToProductList'>
+      <text>{{product.more}}</text>
+      <image src="{{product.moreIcon}}"></image>
+    </view>
+  </view>
+  <view class='product_content' style="{{product.title!=='新手专享'?'background-color:#fff':''}}">
+    <view>
+      <view class='characteristic'>
+        <text>{{product.characteristic}}</text>
+      </view>
+      <view class='disPrice'>
+        <text>￥{{product.minPrice}}</text>
+      </view>
+       <view class='name'>
+        <text>{{product.name}}</text>
+      </view>
+      <view class='addCart' >
+        <button @tap="GoToDetail({{product.id}})">{{product.btnText}}</button>
+      </view>
+    </view>
+  </view>
+  <view class='product_contents'>
+    <repeat for="{{products}}" item="item" >
+        <view @tap="GoToDetail({{product.id}})">
+            <view style="background-image:url({{product.top}})">{{item.name}}</view>
+            <view style="background-image:url({{product.bottom}})" class='product_contents_bottom' >
+                <view class='disPrices'>
+                    <text>￥{{item.minPrice}}</text>
+                </view>
+                <view class='names'>
+                    <text>限时抢购</text>
+                </view>
+            </view>
+        </view>
+    </repeat>
+  </view>
+</view>
+
+</template>
+<script>
+    import wepy from 'wepy'
+    import _Until from '../../utils/until.js'
+    export default class Swipe extends wepy.component {
+        props = {
+            product:{
+                type:Object,
+                default:{}
+            },
+            products:{
+                type:Object,
+                default:[]
+            }
+        }
+        data = {
+            
+        }
+        methods = {
+            GoToProductList(){
+                wx.switchTab({
+                    url: 'ProductList',
+                })
+            },
+            GoToDetail(id){
+              console.log("id",id);
+              wx.navigateTo({
+                url:`../../GoodsDetail?id=${id}`,
+              })
+            }
+        }
+        computed = {
+            
+        }
+    }
+</script>
+<style lang="scss" scoped>
+.product{
+  margin-top:20rpx;
+  background-color:#fff;
+  padding:30rpx;
+  margin-bottom:24rpx;
+}
+.product_head{
+  margin-bottom:20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.product_head image{
+  width:48rpx;
+  height:48rpx;
+  margin-right:10rpx;
+  vertical-align: middle;
+}
+.product_head text{
+  color:#13252e;
+  font-size:28rpx;
+}
+.product_head .more text{
+  color:#aeafaf;
+}
+.more image{
+  width:28rpx;
+  height:28rpx;
+}
+.product_content{
+  background-color: #fffbf0;
+  padding-top:40rpx;
+  padding-bottom:40rpx;
+}
+.characteristic{
+  text-align: center;
+  color:#b28f5b;
+  font-size:32rpx;
+  margin-bottom:20rpx;
+}
+.disPrice{
+  font-size:56rpx;
+  text-align: center;
+  color:#ee524d;
+}
+.name{
+  font-size:30rpx;
+  color: #888888;
+  text-align: center;
+  margin:10rpx 0;
+}
+.addCart{
+  margin-top:22rpx;
+}
+.addCart button{
+  width: 480rpx;
+  height:88rpx;
+  margin:0 auto;
+  color:#fff;
+  line-height: 88rpx;
+  font-size:32rpx;
+  background-image: linear-gradient(to right, #b28f5b, #dfb57d);
+  box-shadow: 0 6px 8px 0 rgba(243, 215, 152, 0.4);
+}
+.product_contents{
+  display: flex;
+  justify-content: space-between
+}
+.product_contents view{
+  width:212rpx;
+  text-align: center;
+}
+.product_contents>view>view:first-child{
+  padding:16rpx 0;
+  color: #13252e;
+  font-size:28rpx;
+  background-size:100% 100%;
+}
+.product_contents>view>view:last-child{
+  padding:16rpx 0;
+  background-size:100% 100%;
+}
+
+.product_contents .product_contents_bottom .disPrices{
+  color: #ee524d;
+  font-size:40rpx;
+}
+.product_contents .product_contents_bottom .names{
+  color: #888888;
+  font-size:22rpx;
+}
+</style>

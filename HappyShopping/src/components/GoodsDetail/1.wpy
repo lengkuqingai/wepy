@@ -1,0 +1,60 @@
+<template>
+    <view class="basicInfo">
+        <view class="characteristic">{{basicInfo.characteristic}}<view>
+        <view>
+            <view>
+                <text>优惠价:<text class="price">￥{{basicInfo.minPrice}}元</text></text>
+                <text>原价:<text class="price">￥{{basicInfo.originalPrice}}元</text></text>
+            </view>
+            <view>
+                <view>
+                    <image scr="../../static/img/share.png"></image>
+                    <text>分享</text>
+                </view>
+                <view>
+                    <image scr="../../static/img/view.png"></image>
+                    <text>{{basicInfo.views}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="remark">
+        <text>{{reputation[0].goods.goodReputationRemark}}</text>
+    </view>
+    <view class="date">
+        <text>{{reputation[0].goods.dateReputation}}</text>
+        <text>{{reputation[0].goods.property}}</text>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class BasicInfo extends wepy.component {
+        props = {
+            basicInfo:{
+                type:Object,
+                default:{}
+            }
+        }
+    }
+</script>
+<style lang="scss" scoped>
+    .basicInfo>view{
+        padding:0 10rpx;
+        font-size:24rpx;
+        line-height:50rpx;
+        height:50rpx;
+        color:#EFEFF1;
+        &:last-child{
+            display:flex;
+            justify-content:space-between;
+            .price{
+                color:#71B641;
+            }
+            image{
+                width:30rpx;
+                height:30rpx;
+                vertical-align:middle;
+            }
+        }
+    }
+</style>

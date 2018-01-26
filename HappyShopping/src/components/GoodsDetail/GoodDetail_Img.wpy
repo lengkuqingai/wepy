@@ -1,0 +1,34 @@
+<template>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" circular="{{circular}}">
+        <block wx:for="{{banner}}" key="item">
+            <swiper-item>
+            <image src="{{item.pic}}" class="slide-image" width="100%" mode='widthFix' />
+            </swiper-item>
+        </block>
+    </swiper>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class Detail extends wepy.component {
+        props ={
+            banner:{
+                type:Object,
+                default:[]
+            }
+        }
+        data = {
+            autoplay:false,
+            indicatorDots:true,
+            interval:true,
+            circular:true
+        }
+    }
+</script>
+<style lang="scss" scoped>
+    swiper{
+        height:450rpx;
+    }
+    image{
+        width:100%;
+    }
+</style>

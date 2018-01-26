@@ -1,0 +1,45 @@
+<template>
+    <view class="wrap">
+        <repeat  for="{{clasic}}" item="item">
+            <view class="item">
+                <text>{{item.name}}</text>
+                <image src="../../static/img/more.png"></image>
+            </view>
+        </repeat>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    export default class List extends wepy.component {
+        props = {
+            clasic:{
+                type:Object,
+                default:[]
+            }
+        }
+    }
+</script>
+<style lang="scss" scoped>
+    .wrap{
+        margin-top:20rpx;
+    }
+    .item{
+        padding:20rpx;
+        border-bottom:1px solid #f6f7f8;
+        background-color:#fff;
+        overflow:hidden;
+        &:last-child{
+            border-bottom:0;           
+        }
+        text{
+            float:left;
+            color:#666;
+            font-size:30rpx;
+        }
+        image{
+            float:right;
+            width:40rpx;
+            height:40rpx;
+        }
+    }
+</style>

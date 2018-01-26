@@ -1,0 +1,67 @@
+<style lang="scss" scoped>
+    
+</style>
+
+<template>
+    <view>
+        <Img :banner.sync="ImgList"></Img>
+        <BasicInfo :basic.sync="basic"></BasicInfo>
+        <List :clasic.sync="Specifications"></List>
+        <Evaluate :reputation.sync="reputation"></Evaluate>
+        <Btn></Btn>
+    </view>
+    
+</template>
+<script>
+    import wepy from 'wepy'
+    import _API from '../http/api.js'
+    import Img from '../components/GoodsDetail/GoodDetail_Img'
+    import Btn from '../components/GoodsDetail/GoodDetail_btn'  
+    import BasicInfo from '../components/GoodsDetail/GoodDetail_basicInfo'  
+    import List from '../components/GoodsDetail/GoodDetail_list'  
+    import Evaluate from '../components/GoodsDetail/GoodDetail_evaluate'                  
+    export default class GoodDetail extends wepy.page {
+        data = {
+            ImgList:[],
+            basic:{},
+            reputation:[],
+            Specifications:[
+                {
+                    name:"选择规格和尺寸"
+                },
+                {
+                    name:"产品参数"
+                }
+            ]
+        }
+        components = {
+            Img:Img,
+            Btn:Btn,
+            BasicInfo:BasicInfo,
+            List:List,
+            Evaluate:Evaluate
+        }
+        onLoad(param,data){
+            let id=param.id;
+            let _this =this;
+            _API.GoodDetail({data:{id:id}},res=>{
+                console.log("商品详情",res.data.data)
+                let good = res.data.data;
+                _this.ImgList =good.pics;
+                _this.basic = {...good.basicInfo,...good.properties};
+                _this.$apply();
+            });
+            _API.Evaluate({data:{goodsId:id}},res=>{
+                console.log("商品评价",res.data.data)
+                let data = res.data.data;
+                _this.reputation = data;
+            })
+        }
+        onShareAppMessage(){
+            return {
+                title: '产品详情',
+                path: '/pages/GoodsDetail?id=4466',
+            }
+        }
+    }
+</script>

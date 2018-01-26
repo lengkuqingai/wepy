@@ -1,0 +1,93 @@
+
+    <view class="_cf48df2">
+        
+    <swiper indicator-dots="{{$Img$indicatorDots}}" autoplay="{{$Img$autoplay}}" interval="{{$Img$interval}}" circular="{{$Img$circular}}" class="_ea512a0 _cf48df2">
+        <block  wx:for="{{$Img$banner}}" key="item" class="_ea512a0">
+            <swiper-item class="_ea512a0">
+            <image src="{{item.pic}}" class="slide-image _ea512a0" width="100%" mode="widthFix"/>
+            </swiper-item>
+        </block>
+    </swiper>
+        
+    <view class="basicInfo _74d9f6e _cf48df2">
+        <view class="characteristic _74d9f6e"><text class="_74d9f6e">{{$BasicInfo$basic.characteristic}}</text></view>
+        <view class="priceShare _74d9f6e">
+            <view class="_74d9f6e">
+                <text class="_74d9f6e">原价:<text class="price _74d9f6e" style="text-decoration:line-through ">￥{{$BasicInfo$basic.originalPrice}}元</text></text>
+                <text class="_74d9f6e">优惠价:<text class="price _74d9f6e" style="font-size:40rpx">￥{{$BasicInfo$basic.minPrice}}元</text></text>
+            </view>
+            <view class="_74d9f6e">
+                <view bindtap="$BasicInfo$share" class="_74d9f6e">
+                    <button open-type="share" style="background-image:url('../../static/img/share.png');" class="_74d9f6e"/>
+                    <text class="_74d9f6e">分享</text>
+                </view>
+                <view class="_74d9f6e">
+                    <button style="background-image:url('../../static/img/view.png');" class="_74d9f6e"/>
+                    <text class="_74d9f6e">{{$BasicInfo$basic.views}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="express _74d9f6e"  wx:if="{{$BasicInfo$basic.isFree==$BasicInfo$true}}">
+            快递:0.00元
+        </view>
+    </view>
+        
+    <view class="wrap _535d7d6 _cf48df2">
+        <block class="_535d7d6" wx:for="{{$List$clasic}}" wx:for-index="$List$index" wx:for-item="$List$item" wx:key="$List$key">
+            <view class="item _535d7d6">
+                <text class="_535d7d6">{{$List$item.name}}</text>
+                <image src="../static/img/more.png" class="_535d7d6"/>
+            </view>
+        </block>
+    </view>
+        
+    <view class="wrap _9d1c010 _cf48df2">
+        <view class="head _9d1c010">
+            <view class="line _9d1c010">
+            ------------------------------------------------------------------------
+                <view class="center _9d1c010">
+                    <view class="evaluate _9d1c010">
+                        <image mode="widthFix" src="../static/img/evaluate.png" class="_9d1c010"/>
+                        <text class="_9d1c010">评价</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="content _9d1c010">
+            <view class="title _9d1c010">
+                <text class="_9d1c010"/>宝贝评价</view>
+            </view>
+            <view class="list _9d1c010">
+                <view class="head _9d1c010">
+                    <image src="../static/img/head.png" class="_9d1c010"/>
+                </view>
+                <view class="name _9d1c010">
+                    {{$Evaluate$reputation[0].user.nick}}
+                </view>
+                <view class="reputation _9d1c010"  wx:if="{{$Evaluate$reputation[0].goods.goodReputation==0}}">
+                    差评              
+                </view>
+                <view class="reputation _9d1c010"  wx:if="{{$Evaluate$reputation[0].goods.goodReputation==1}}">
+                    中评              
+                </view>
+                <view class="reputation _9d1c010"  wx:if="{{$Evaluate$reputation[0].goods.goodReputation==2}}">
+                    好评              
+                </view>
+                <view class="remark _9d1c010">
+                    {{$Evaluate$reputation[0].goods.goodReputationRemark}}
+                </view>
+                <view class="date _9d1c010">
+                   <view class="_9d1c010">{{$Evaluate$reputation[0].goods.dateReputation}}</view>
+                   <view class="property _9d1c010">{{$Evaluate$reputation[0].goods.property}}</view>
+                </view>
+                <view class="btn _9d1c010" bindtap="$Evaluate$GoToAll">
+                    查看全部评价
+                </view>
+            </view>
+        </view>
+        
+    <view class="btn _f7dd0e9 _cf48df2">
+        <view class="addCart _f7dd0e9">添加购物车</view>
+        <view class="buy _f7dd0e9">立即购买</view>
+    </view>
+    </view>

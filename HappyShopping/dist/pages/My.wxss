@@ -1,0 +1,4 @@
+@import "./../components/My/My_list.wxss";
+@import "./../components/My/My_list.wxss";
+@import "./../components/My/My_personal.wxss";
+.header image._c4b0505{width:100%}

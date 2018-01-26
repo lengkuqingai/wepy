@@ -1,0 +1,86 @@
+<style lang="scss" scoped>
+
+</style>
+<template>
+  <view >
+    <Swipe :banner.sync="banner" :swipe_height.sync="swipe_heights" wx:if="{{banner&&banner.length>1}}"></Swipe>
+    <Products1 :product.sync="productNP"></Products1>
+    <Products2 :product.sync="productJP" :products.sync="products"></Products2>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import _API from '../http/api.js'
+  import Swipe from '../components/Home/Home_swipe'
+  import Products from '../components/Home/Home_Products'  
+  import _Until from '../utils/until.js'
+  
+  export default class Home extends wepy.page {
+    config = {
+      navigationBarTitleText: '欢乐购'
+    }
+    components = {
+      Swipe:Swipe,
+      Products1:Products,
+      Products2:Products
+    }
+
+    data = {
+      banner:[],
+      swipe_height:"",
+      productNP:{
+        icon:'../static/img/NP.png',
+        title:"新手专享",
+        characteristic:"",
+        minPrice:"",
+        name:"",
+        btnText:"马上买入"
+      },
+      productJP:{
+        icon:'../static/img/JP.png',
+        title:"精品推荐",
+        more:"更多",
+        moreIcon:'../static/img/more.png',
+        characteristic:"",
+        minPrice:"",
+        name:"",
+        btnText:"火热抢购中",
+        top:"../static/img/background_top.png",
+        bottom:"../static/img/background_bottom.png"
+      },
+      products:[]
+    }
+
+    events = {
+      
+    }
+    computed = {
+
+    }
+    onShow(){
+
+    }
+    onReady(){
+      // 获取首页商品列表
+      let _this = this;
+      _API.GoodsList({data:{page:3,pageSize:5}},(data)=>{
+        console.log("商品列表",data.data.data)
+        _this.productNp = Object.assign(_this.productNP,data.data.data.slice(0,1)[0]);
+        _this.productJP = Object.assign(_this.productJP,data.data.data.slice(1,2)[0]);
+        _this.products = data.data.data.slice(2);
+        _this.$apply();
+        console.log(_this.productNP)
+      })
+    }
+    onLoad () {
+      let _this = this;
+      _API.Banner({},(data)=>{
+        console.log("banner图信息",data.data.data)
+        _this.banner = data.data.data;
+        _this.$apply();
+        
+      })
+    }
+  }
+</script>

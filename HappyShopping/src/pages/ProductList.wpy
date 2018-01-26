@@ -1,0 +1,80 @@
+<style lang="scss" scoped>
+    
+</style>
+
+<template>
+    <view>
+        <Sort :sortClass.sync="sortClass"></Sort>
+        <List :productList.sync="productList" :imgWidth.sync="imgWidth" ></List>
+    </view>
+    
+</template>
+<script>
+    import wepy from 'wepy'
+    import Sort from '../components/Product/Product_sort'
+    import List from '../components/Product/Product_list'
+    import _API from '../http/api.js'
+    export default class ProductList extends wepy.page {
+        config = {
+            navigationBarTitleText: '欢乐购'
+        }
+        components = {
+            Sort:Sort,
+            List:List
+        }
+        data = {
+            sortBy:[1,0],
+            sortClass:"priceUp",
+            // 动态传给子组件时，必须提前在data里面声明
+            productList:[],
+            imgWidth:'',
+            page:2
+        }
+        methods = {
+
+        }
+        watch = {
+            sortClass(after,before){
+                this.page = 2;
+                let _this = this;
+                _API.GoodsList({data:{page:_this.page,pageSize:20,orderBy:after}},(data)=>{
+                    _this.productList = data.data.data;
+                    _this.$apply();
+                    console.log(`商品按照${after}排序`,_this.productList)
+                });
+                _this.$broadcast('clean'); 
+            }
+        }
+        onShow(){
+            
+        }
+        onLoad(){
+            let _this = this;
+            _API.GoodsList({data:{page:_this.page,pageSize:20,orderBy:this.sortClass}},(data)=>{
+                console.log(`默认价格升序排序`,data.data.data)
+                _this.productList = data.data.data;
+                _this.$apply();
+            })
+            // 获取系统信息
+            wx.getSystemInfo({
+                success: (res) => {
+                    let ww = res.windowWidth;
+                    let wh = res.windowHeight;
+                    let imgWidth = ww * 0.45;
+                    _this.imgWidth=imgWidth;
+                    _this.$apply();
+                }
+            })
+        }
+        onReachBottom(){
+            console.log("加载更多~~~");
+            let _this = this;
+            _this.page++;
+            _API.GoodsList({data:{page:_this.page,pageSize:20,orderBy:this.sortClass}},(data)=>{
+                console.log(`默认价格升序排序`,data.data.data)
+                _this.productList = data.data.data;
+                _this.$apply();
+            })
+        }
+    }
+</script>
